@@ -1,4 +1,4 @@
-# CityGuesser
+# EarthGuesser
 A very original web game I came up with, not a copy of some other not free game at all. As you can see the name is also very original.
 
 ## How it works?

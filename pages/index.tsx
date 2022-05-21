@@ -1,14 +1,13 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-
+import { useEffect, useRef } from 'react'
+import { Loader } from "@googlemaps/js-api-loader"
 
 const Home: NextPage = () => {
+
   return (
-    <div>
-      s
-    </div>
+    <div></div>
   )
+  
 }
 
 export default Home
