@@ -9,8 +9,8 @@ The app uses Next.js and Postgree SQL, Google Maps, and Tailwind.
 
 ## Progress made:
 - [x] Project created
-- [ ] Got Google Maps api (scary😦)
-- [ ] Created the core gameplay functionality
+- [x] Got Google Maps api (scary😦)
+- [x] Created the core gameplay functionality
 - [ ] Created authentication
 - [ ] Created leaderboard
 - [ ] Made welcome page, naviagtion and stuff.
@@ -21,3 +21,6 @@ The app uses Next.js and Postgree SQL, Google Maps, and Tailwind.
 ## Note
 
 Uhhh, IDK if I'm allowed to do that, but I had to modify random-streetview a little, so now I don't use the package but have the copied code instead.
+
+Also I had to generate random locations in browser so I had to implement some
+weird anti-cheating solutions.

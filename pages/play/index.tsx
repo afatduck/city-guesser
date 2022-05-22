@@ -1,38 +1,58 @@
 import { Loader } from '@googlemaps/js-api-loader';
-import randomStreetView from '../../random-streetview';
+import randomStreetView from '../../utils/random-streetview';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { createLocationKey } from '../../utils/redis/createLocationKey';
+import LE from '../../utils/locationEncryption';
 
 const Result = dynamic(() => import('../../components/client/result'), { ssr: false });
 
-function Index({googleMapsApiKey, location}: Props) {
+function Index({googleMapsApiKey, locationKey}: Props) {
 
+    // Init state and refs
+
+    const rsw = useRef<randomStreetView | null>(null);
     const googlestreet = useRef(null);
     const googlemap = useRef(null);
     const usermarker = useRef<any>(null);
-    const rsw = useRef<randomStreetView | null>(null);
     const target = useRef<any>(null);
-    const userpoint = useRef<any>(null);
+    const guess = useRef<any>(null);
 
     const [submitted, setSubmitted] = useState(false);
 
+    // Once component renders
+
     useEffect(() => {
+
+        // Set up google maps api
+
         rsw.current = new randomStreetView();
-        const loader = new Loader({
-        apiKey: googleMapsApiKey,
-        version: 'weekly',
-        });
+        const loader = new Loader({ apiKey: googleMapsApiKey, version: 'weekly'});
+
         let street: google.maps.StreetViewPanorama;
         let map: google.maps.Map;
+
+        // Load google maps api
+
         loader.load().then(() => {
 
+            // Get api from loader
+
+            const google = window.google;
+
             rsw.current?.setParameters({
-                google: window.google as any,
-            })  
+                google: google as any,
+            })
+
+
+            // Generate random streetview location
 
             rsw.current?.getRandomLocation().then((loc: any) =>{
-                const google = window.google;
+
                 target.current = [loc[0], loc[1]];
+
+                // Create streetview panorama
+
                 street = new google.maps.StreetViewPanorama(
                     googlestreet.current as any, {
                     position: { lat: loc[0], lng: loc[1] },
@@ -45,12 +65,15 @@ function Index({googleMapsApiKey, location}: Props) {
                     linksControl: false,
                     showRoadLabels: false
                     });
-                });
+
+                // Create map
 
                 map = new google.maps.Map(googlemap.current as any, {
                     zoom: 0,
                     center: { lat: 0, lng: 0 },
                 });
+
+                // Create marker on click
 
                 map.addListener('click', (e: any) => {
                     if (usermarker.current) { usermarker.current.setMap(null); }
@@ -58,16 +81,42 @@ function Index({googleMapsApiKey, location}: Props) {
                         position: e.latLng,
                         map: map
                     });
-                    userpoint.current = [e.latLng.lat(), e.latLng.lng()];
+                    guess.current = [e.latLng.lat(), e.latLng.lng()];
                     document.getElementById("guess-button")?.removeAttribute("disabled");
                 });
+
+                // Save location to redis
+
+                const encrypted = LE.encryptLocation([loc[0], loc[1]]);
+                fetch('/api/save-location', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        location: encrypted,
+                        key: locationKey
+                    })
+                })
+            });
         });
     }, []);
 
     const handleSubmit = () => {
-        console.log("koj kurav");
-        
+        if (!guess.current) return;
         setSubmitted(true);
+
+        // Submit the result
+        fetch("/api/submit-location", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                location: (guess.current as any),
+                key: locationKey
+            })
+        })
     }
 
     return (
@@ -78,7 +127,7 @@ function Index({googleMapsApiKey, location}: Props) {
                     rounded-lg right-[50%] translate-x-[50%] md:translate-x-0">
 
                     <div id='map' ref={googlemap}
-                    className="w-full h-48 rounded-lg mb-6"/>
+                    className="w-full h-48 rounded-lg mb-6 shadow-md"/>
 
                     <button type='button' className='bg-green-700 hover:bg-green-800
                     text-white font-bold py-2 px-4 rounded-full w-full uppercase
@@ -88,30 +137,29 @@ function Index({googleMapsApiKey, location}: Props) {
                     </button>
 
             </div>
-            {
-                submitted &&
-                <Suspense>
-                    <Result show={true} loc1={target.current as any} 
-                    loc2={userpoint.current as any}/>
-                </Suspense>
-            }
+            <Suspense>
+                <Result show={submitted} loc1={target.current as any} 
+                loc2={guess.current as any}/>
+            </Suspense>
         </div>
     );
 }
 
 export async function getServerSideProps() {
 
+    const locationKey = createLocationKey();
+
     return {
         props: {
             googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
-            location: null
+            locationKey: locationKey
         }
     }
 }
 
 type Props = {
     googleMapsApiKey: string
-    location: [number, number]
+    locationKey: string
 }
 
 export default Index

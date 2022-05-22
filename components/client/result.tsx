@@ -21,6 +21,8 @@ function Result({loc1, loc2, show}: Props) {
     const resultMap = React.useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+
+        // Create map
         const google = window.google
         const map = new google.maps.Map(resultMap.current as HTMLDivElement, {
             zoom: getZoom(distance),
@@ -28,16 +30,27 @@ function Result({loc1, loc2, show}: Props) {
             disableDefaultUI: true,
         })
 
+        // Create target marker
         new google.maps.Marker({
             position: { lat: loc1[0], lng: loc1[1] },
             map: map,
             title: 'Target',
         })
 
+        // Create guess marker
         new google.maps.Marker({
             position: { lat: loc2[0], lng: loc2[1] },
             map: map,
             title: 'Your Guess',
+        })
+
+        // Create line
+        new google.maps.Polyline({
+            path: [{lat: loc1[0], lng: loc1[1]}, {lat: loc2[0], lng: loc2[1]}],
+            strokeColor: '#f00',
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+            map: map,
         })
 
     }, [])
@@ -68,6 +81,12 @@ function Result({loc1, loc2, show}: Props) {
 
             <div ref={resultMap} 
             className="w-full mt-8 h-64 rounded-lg"/>
+
+            <button className='bg-green-700 hover:bg-green-800 mt-8
+            text-white font-bold py-2 px-4 rounded-full w-full uppercase'
+            onClick={() => window.location.reload()}>
+                Play Again
+            </button>
 
         </div>
 

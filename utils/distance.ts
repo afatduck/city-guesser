@@ -7,9 +7,7 @@ function toDegrees(radians: number) {
 }
 
 // Get distance in meters between two points on Earth
-export function getDistance(lat1: number, lon1: number, lat2:number, lon2:number) {
-    console.log(lat1, lon1, lat2, lon2);
-    
+export function getDistance(lat1: number, lon1: number, lat2:number, lon2:number) {    
     var R = 6371e3; // metres
     var φ1 = toRadians(lat1);
     var φ2 = toRadians(lat2);
