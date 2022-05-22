@@ -1,11 +1,16 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next"
 import { BuiltInProviderType } from "next-auth/providers"
 import { ClientSafeProvider, getProviders, getSession, LiteralUnion, signIn } from "next-auth/react"
+import Head from "next/head";
 import { BrandGoogle } from "tabler-icons-react";
 
 export default function SignIn({ providers }: Props) {
   const  googleProvider = Object.values(providers)[0];
   return (
+    <>
+    <Head>
+      <title>Sign in | EarthGuesser</title>
+    </Head>
     <div className="grow flex justify-center items-center">
       <div className="bg-neutral-800 p-8 rounded-lg">
         <h2 className="text-xl font-bold">Sign in:</h2>
@@ -17,6 +22,7 @@ export default function SignIn({ providers }: Props) {
         <em className="opacity-50 font-extralight">Currently the only option.</em>
       </div>
     </div>
+    </>
   )
 }
 

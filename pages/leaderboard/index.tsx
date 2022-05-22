@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { useSession } from 'next-auth/react';
+import Head from 'next/head';
 import React from 'react'
 
 const prisma = new PrismaClient();
@@ -10,7 +11,11 @@ function Index({leaderboard}: Props) {
     const userId = session?.data?.user?.id
 
   return (
-    <div className='grow max-w-xl mx-auto w-full pt-16 flex-col'>
+    <>
+    <Head>
+        <title>Leaderboard | EarthGuesser</title>
+    </Head>
+    <div className='grow max-w-xl mx-auto w-full pt-16 flex-col px-6'>
     <div className='flex items-center px-2 border-b border-b-neutral-700'>
         <h2 className='text-2xl font-bold pb-2'>
             Leaderboard
@@ -22,7 +27,7 @@ function Index({leaderboard}: Props) {
       {
           leaderboard.map(user => (
                 <div className={`flex items-center bg-neutral-800 my-2 rounded-md px-4
-                justify-between p-2 ` + (user.id === userId && "text-green-500")}>
+                justify-between p-2 ` + (user.id === userId && "text-green-500")} key={user.id}>
                     <img className='w-7 h-7 rounded-full mr-2' src={user.image}
                     width={28} height={28} />
                     <span className='font-bold mr-auto ml-2'>{user.name}</span>
@@ -33,6 +38,7 @@ function Index({leaderboard}: Props) {
       }
       </div>
     </div>
+    </>
   )
 }
 

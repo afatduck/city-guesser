@@ -13,14 +13,18 @@ export default function Nav() {
         <nav className="flex px-8 py-4 justify-between items-center 
         border-b-neutral-600 border-b">
             <Image src={Logo} height={32} width={32} />
-            <Link href="/">
-                <h1 className="font-extrabold text-3xl cursor-pointer">
+            <Link href="/" rel="back">
+                <h1 className="font-extrabold md:text-3xl text-2xl cursor-pointer">
                     EarthGuesser
                 </h1>
             </Link>
             <div className="flex relative items-center">
-                <Link href="/leaderboard" title="Leaderboard">
-                    <Trophy className="relative right-16 cursor-pointer" />
+                <Link href="/leaderboard" title="Leaderboard" rel="next">
+                    <span>
+                    <Trophy className="absolute md:right-16 cursor-pointer
+                    md:top-0 top-16 bg-neutral-900 z-30 rounded-full
+                    -right-4 p-2 box-content md:box-border md:p-0 md:relative" />   
+                    </span>
                 </Link>
                 {
                     session.status === "authenticated" ?

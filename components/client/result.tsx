@@ -56,10 +56,9 @@ function Result({loc1, loc2, show}: Props) {
     }, [])
 
   return (
-      <div className='absolute w-full h-full bg-[#000a] flex justify-center 
-      items-center top-0 left-0 z-20'>
+      <div className='modal-outer'>
 
-        <div className='absolute p-8 w-[90%] lg:w-[50vw] md:p-16 bg-neutral-900 rounded-2xl'>
+        <div className=''>
 
             <div className='justify-between flex flex-col items-center gap-8 md:flex-row'>
                 <h2 className='font-bold text-4xl'>{ResultMessages(distance)}</h2>
@@ -82,7 +81,7 @@ function Result({loc1, loc2, show}: Props) {
             <div ref={resultMap} 
             className="w-full mt-8 h-64 rounded-lg"/>
 
-            <button className='bg-green-700 hover:bg-green-800 mt-8
+            <button className='bg-green-700 mt-8
             text-white font-bold py-2 px-4 rounded-full w-full uppercase'
             onClick={() => window.location.reload()}>
                 Play Again

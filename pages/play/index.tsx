@@ -4,6 +4,7 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { createLocationKey } from '../../utils/redis/createLocationKey';
 import LE from '../../utils/locationEncryption';
+import Head from 'next/head';
 
 const Result = dynamic(() => import('../../components/client/result'), { ssr: false });
 
@@ -120,6 +121,10 @@ function Index({googleMapsApiKey, locationKey}: Props) {
     }
 
     return (
+        <>
+        <Head>
+            <title>Game! | EarthGuesser</title>
+        </Head>
         <div className="flex flex-col items-center justify-center h-full relative">
             <div id="street" ref={googlestreet} className="h-full w-full" />
 
@@ -129,7 +134,7 @@ function Index({googleMapsApiKey, locationKey}: Props) {
                     <div id='map' ref={googlemap}
                     className="w-full h-48 rounded-lg mb-6 shadow-md"/>
 
-                    <button type='button' className='bg-green-700 hover:bg-green-800
+                    <button type='button' className='bg-green-700
                     text-white font-bold py-2 px-4 rounded-full w-full uppercase
                     disabled:opacity-50 disabled:pointer-events-none shadow-md'
                      id='guess-button' onClick={handleSubmit}>
@@ -142,6 +147,7 @@ function Index({googleMapsApiKey, locationKey}: Props) {
                 loc2={guess.current as any}/>
             </Suspense>
         </div>
+        </>
     );
 }
 

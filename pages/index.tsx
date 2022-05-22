@@ -1,11 +1,48 @@
 import type { NextPage } from 'next'
-import { useEffect, useRef } from 'react'
-import { Loader } from "@googlemaps/js-api-loader"
+import Head from 'next/head'
+import Link from 'next/link'
+import Cookies from '../components/client/cookies'
 
 const Home: NextPage = () => {
 
   return (
-    <div></div>
+    <>
+    <Head>
+      <title>Welcome! | EarthGuesser</title>
+    </Head>
+    <div className='grow max-w-xl mx-auto w-full pt-16 flex-col flex px-8 text-justify'>
+      <Cookies />
+      <h1 className='md:text-6xl text-5xl font-extrabold text-center leading-[1.1]'>
+        Welcome to <span className='text-green-500'>EarthGuesser!</span>
+      </h1>
+      <p className='mt-16'>
+        This is a total rip-off of the GeoGuesser game. Since GeoGuesser has
+        very limited playing time (unless you pay, and come on you will not
+        pay to play fucking GeoGuesserer), I decided to make a game that is
+        baisically the same, but completely free.
+      </p>
+      <p className='mt-4'>
+        Funnily enough, it turns out that rip-offs are completely legal because
+        you can't put copyright on gameplay mechanics, only the assets.
+      </p>
+      <p className='mt-4'>
+        The game is currently in very early development, so it's kinda shit.
+        Until further updates (which I will probably never do), you can play
+        only the completely random gamemode (so expect being put in deserts, 
+        forests, seas and other unhelpful locations). 
+        You can also expect bugs, like map not loading, or your
+        score not being saved. And lastly, cheting is possible, so I'd
+        like to see you try. ^^
+      </p>
+
+      <Link href='/play' rel='next'>
+        <button className=' text-3xl py-6 w-[80%] font-extrabold mt-16
+        bg-green-600 rounded-xl mx-auto mb-24'>
+          PLAY
+        </button>
+      </Link>
+    </div>
+    </>
   )
   
 }
