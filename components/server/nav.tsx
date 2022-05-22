@@ -10,7 +10,8 @@ export default function Nav() {
     const session = useSession();    
 
     return (
-        <nav className="flex px-8 py-4 justify-between items-center">
+        <nav className="flex px-8 py-4 justify-between items-center 
+        border-b-neutral-600 border-b">
             <Image src={Logo} height={32} width={32} />
             <Link href="/">
                 <h1 className="font-extrabold text-3xl cursor-pointer">
