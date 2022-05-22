@@ -37,17 +37,12 @@ class LocationEncryptor {
     }
 
     decryptLocation (encrypted: string): [number, number] {
-
-        console.log(2, this.private_key);
         
-
         const decryptedJSON = nodeRsa.decryptStringWithRsaPrivateKey({
             text: encrypted,
             privateKey: this.private_key
         });
-        console.log(decryptedJSON);
         
-
         const decrypted = JSON.parse(decryptedJSON);
         
         // Check the validity of the decrypted location
