@@ -12,7 +12,7 @@ The app uses Next.js and Postgree SQL, Google Maps, and Tailwind.
 - [x] Got Google Maps api (scary😦)
 - [x] Created the core gameplay functionality
 - [x] Created authentication
-- [ ] Created leaderboard
+- [x] Created leaderboard
 - [ ] Made welcome page, naviagtion and stuff.
 - [ ] Icons, meta tags, and stuff like that.
 - [ ] Deplyment!
