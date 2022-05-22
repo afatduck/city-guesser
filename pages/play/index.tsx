@@ -1,12 +1,21 @@
 import { Loader } from '@googlemaps/js-api-loader';
-import randomStreetView from 'random-streetview';
-import { useEffect, useRef } from 'react';
+import randomStreetView from '../../random-streetview';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const Result = dynamic(() => import('../../components/client/result'), { ssr: false });
 
 function Index({googleMapsApiKey, location}: Props) {
+
     const googlestreet = useRef(null);
     const googlemap = useRef(null);
     const usermarker = useRef<any>(null);
     const rsw = useRef<randomStreetView | null>(null);
+    const target = useRef<any>(null);
+    const userpoint = useRef<any>(null);
+
+    const [submitted, setSubmitted] = useState(false);
+
     useEffect(() => {
         rsw.current = new randomStreetView();
         const loader = new Loader({
@@ -18,11 +27,12 @@ function Index({googleMapsApiKey, location}: Props) {
         loader.load().then(() => {
 
             rsw.current?.setParameters({
-                google: window.google,
+                google: window.google as any,
             })  
 
-            rsw.current?.getRandomLocation().then(loc =>{
+            rsw.current?.getRandomLocation().then((loc: any) =>{
                 const google = window.google;
+                target.current = [loc[0], loc[1]];
                 street = new google.maps.StreetViewPanorama(
                     googlestreet.current as any, {
                     position: { lat: loc[0], lng: loc[1] },
@@ -48,10 +58,18 @@ function Index({googleMapsApiKey, location}: Props) {
                         position: e.latLng,
                         map: map
                     });
+                    userpoint.current = [e.latLng.lat(), e.latLng.lng()];
                     document.getElementById("guess-button")?.removeAttribute("disabled");
                 });
         });
-    });
+    }, []);
+
+    const handleSubmit = () => {
+        console.log("koj kurav");
+        
+        setSubmitted(true);
+    }
+
     return (
         <div className="flex flex-col items-center justify-center h-full relative">
             <div id="street" ref={googlestreet} className="h-full w-full" />
@@ -62,14 +80,21 @@ function Index({googleMapsApiKey, location}: Props) {
                     <div id='map' ref={googlemap}
                     className="w-full h-48 rounded-lg mb-6"/>
 
-                    <button type='button' className='bg-sky-700 hover:bg-sky-800
+                    <button type='button' className='bg-green-700 hover:bg-green-800
                     text-white font-bold py-2 px-4 rounded-full w-full uppercase
-                    disabled:opacity-50 disabled:pointer-events-none'
-                    disabled id='guess-button'>
+                    disabled:opacity-50 disabled:pointer-events-none shadow-md'
+                     id='guess-button' onClick={handleSubmit}>
                         Guess
                     </button>
 
             </div>
+            {
+                submitted &&
+                <Suspense>
+                    <Result show={true} loc1={target.current as any} 
+                    loc2={userpoint.current as any}/>
+                </Suspense>
+            }
         </div>
     );
 }

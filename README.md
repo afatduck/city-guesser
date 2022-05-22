@@ -16,3 +16,8 @@ The app uses Next.js and Postgree SQL, Google Maps, and Tailwind.
 - [ ] Made welcome page, naviagtion and stuff.
 - [ ] Icons, meta tags, and stuff like that.
 - [ ] Deplyment!
+
+
+## Note
+
+Uhhh, IDK if I'm allowed to do that, but I had to modify random-streetview a little, so now I don't use the package but have the copied code instead.
