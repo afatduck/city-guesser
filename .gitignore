@@ -34,5 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# next-auth stuff
+# Redis cache
 *.rdb
