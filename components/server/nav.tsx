@@ -28,12 +28,12 @@ export default function Nav() {
                 </Link>
                 {
                     session.status === "authenticated" ?
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-4">
                         <p className="underline cursor-pointer"
                         onClick={() => {signOut()}}>Log out</p> 
                         <Image src={session.data.user.image} height={32} 
                         width={32} alt="Avatar" 
-                        className="rounded-full ml-4"/>
+                        className="rounded-full"/>
                     </div>
                     :
                     <p className="underline cursor-pointer"
