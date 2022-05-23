@@ -1,10 +1,11 @@
 import { Loader } from '@googlemaps/js-api-loader';
 import randomStreetView from '../../utils/random-streetview';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { createLocationKey } from '../../utils/redis/createLocationKey';
 import LE from '../../utils/locationEncryption';
 import Head from 'next/head';
+import { ArrowBackUp } from 'tabler-icons-react';
 
 const Result = dynamic(() => import('../../components/client/result'), { ssr: false });
 
@@ -18,6 +19,7 @@ function Index({googleMapsApiKey, locationKey}: Props) {
     const usermarker = useRef<any>(null);
     const target = useRef<any>(null);
     const guess = useRef<any>(null);
+    const streetview = useRef<any>(null);
 
     const [submitted, setSubmitted] = useState(false);
 
@@ -66,6 +68,7 @@ function Index({googleMapsApiKey, locationKey}: Props) {
                     linksControl: false,
                     showRoadLabels: false
                     });
+                streetview.current = street;
 
                 // Create map
 
@@ -120,6 +123,16 @@ function Index({googleMapsApiKey, locationKey}: Props) {
         })
     }
 
+    const backCallback = useCallback(() => {
+        if (!streetview.current || !target.current) return
+        streetview.current.setPosition({
+            lat: target.current[0],
+            lng: target.current[1]
+        });
+    }, [target, streetview]);
+
+    const handleBack = () => backCallback();
+
     return (
         <>
         <Head>
@@ -131,8 +144,12 @@ function Index({googleMapsApiKey, locationKey}: Props) {
                 <div className="absolute bottom-16 md:right-24 z-10 w-80
                     rounded-lg right-[50%] translate-x-[50%] md:translate-x-0">
 
+                    <ArrowBackUp className='p-2 bg-neutral-900 box-content
+                    rounded-full ml-auto hover:brightness-90 cursor-pointer'
+                    onClick={handleBack} />
+
                     <div id='map' ref={googlemap}
-                    className="w-full h-48 rounded-lg mb-6 shadow-md"/>
+                    className="w-full h-48 rounded-lg my-6 shadow-md"/>
 
                     <button type='button' className='bg-green-700
                     text-white font-bold py-2 px-4 rounded-full w-full uppercase
