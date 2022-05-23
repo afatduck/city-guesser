@@ -23,15 +23,15 @@ const Home: NextPage = () => {
       </p>
       <p className='mt-4'>
         Funnily enough, it turns out that rip-offs are completely legal because
-        you can't put copyright on gameplay mechanics, only the assets.
+        you can&apos;t put copyright on gameplay mechanics, only the assets.
       </p>
       <p className='mt-4'>
-        The game is currently in very early development, so it's kinda shit.
+        The game is currently in very early development, so it&apos;s kinda shit.
         Until further updates (which I will probably never do), you can play
         only the completely random gamemode (so expect being put in deserts, 
         forests, seas and other unhelpful locations). 
         You can also expect bugs, like map not loading, or your
-        score not being saved. And lastly, cheting is possible, so I'd
+        score not being saved. And lastly, cheting is possible, so I&apos;d
         like to see you try. ^^
       </p>
 

@@ -12,7 +12,7 @@ export default function Nav() {
     return (
         <nav className="flex px-8 py-4 justify-between items-center 
         border-b-neutral-600 border-b">
-            <Image src={Logo} height={32} width={32} />
+            <Image src={Logo} height={32} width={32} alt="Logo" />
             <Link href="/" rel="back">
                 <h1 className="font-extrabold md:text-3xl text-2xl cursor-pointer">
                     EarthGuesser
@@ -31,7 +31,8 @@ export default function Nav() {
                     <div className="flex items-center">
                         <p className="underline cursor-pointer"
                         onClick={() => {signOut()}}>Log out</p> 
-                        <img src={session.data.user.image} height={32} width={32} 
+                        <Image src={session.data.user.image} height={32} 
+                        width={32} alt="Avatar" 
                         className="rounded-full ml-4"/>
                     </div>
                     :

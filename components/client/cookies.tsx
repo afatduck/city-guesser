@@ -27,7 +27,7 @@ function Cookies() {
         <p className='text-justify'>
             There is that EU cookie law thing or whatever. I need your consent 
             to store any kind of data on your device (browser). There is no
-            way in hell I'm going to customize how this website works for some of you
+            way in hell I&apos;m going to customize how this website works for some of you
             whiny conspiracy theorists, so just accept all or leave.
         </p>
         <div className='flex gap-4 mt-4'>

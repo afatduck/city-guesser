@@ -12,15 +12,15 @@ const distanceToString = (distance: number) => {
 
 function Result({loc1, loc2, show}: Props) {
 
-    if (!show) return <></>
-
-    const distance = getDistance(loc1[0], loc1[1], loc2[0], loc2[1])
-    const center = getCenter(loc1[0], loc1[1], loc2[0], loc2[1])
-    const points = getPoints(distance)
-
     const resultMap = React.useRef<HTMLDivElement>(null)
 
+    const distance = !show ? 0 : getDistance(loc1[0], loc1[1], loc2[0], loc2[1])
+    const center = !show ? [0,0] : getCenter(loc1[0], loc1[1], loc2[0], loc2[1])
+    const points = !show ? null : getPoints(distance)
+
     useEffect(() => {
+
+        if (!show) return;
 
         // Create map
         const google = window.google
@@ -53,7 +53,9 @@ function Result({loc1, loc2, show}: Props) {
             map: map,
         })
 
-    }, [])
+    }, [center, distance, loc1, loc2])
+
+    if (!show) return <></>
 
   return (
       <div className='modal-outer'>

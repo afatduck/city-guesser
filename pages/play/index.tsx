@@ -101,7 +101,7 @@ function Index({googleMapsApiKey, locationKey}: Props) {
                 })
             });
         });
-    }, []);
+    }, [locationKey]);
 
     const handleSubmit = () => {
         if (!guess.current) return;
