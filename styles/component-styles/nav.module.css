@@ -25,10 +25,10 @@
 
         & > div {
             @apply flex items-center gap-4;
+        }
 
-            p {
-                @apply underline cursor-pointer;
-            }
+        p {
+            @apply underline cursor-pointer;
         }
         
     }
