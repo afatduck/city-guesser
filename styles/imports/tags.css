@@ -1,0 +1,11 @@
+html {
+    @apply bg-neutral-900 text-white h-full;
+}
+
+body {
+    @apply h-screen;
+}
+
+button {
+    @apply hover:brightness-90;
+}

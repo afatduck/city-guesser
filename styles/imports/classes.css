@@ -1,0 +1,12 @@
+/* Modal */
+
+.modal-outer {
+    @apply flex flex-col items-center justify-center bg-[#000a]
+    fixed top-0 left-0 h-screen w-screen z-50;
+    animation: fade-in .5s ease-out;
+}
+
+.modal-outer > div {
+    @apply absolute p-8 w-[90%] lg:w-[50vw] md:p-12 bg-neutral-900 rounded-2xl;
+    animation: fade-in-down .5s ease-in-out;
+}

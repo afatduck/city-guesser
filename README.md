@@ -2,7 +2,7 @@
 A very original web game I came up with, not a copy of some other not free game at all. As you can see the name is also very original.
 
 ## How it works?
-Umm, you are placed in some random city in street view, and you have to guess where you are by placing a point on a map. The closer you are, the more points you get.
+Umm, you are placed in some random place in street view, and you have to guess where you are by placing a point on a map. The closer you are, the more points you get.
 
 ## Technologies and stuff
 The app uses Next.js and Postgree SQL, Google Maps, and Tailwind.

@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Nav from '../components/server/nav'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'
+import Cookies from '../components/client/cookies'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return <>
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       <meta name="keywords" content="GeoGuesser Free, EarthGuesser" />
     </Head>
     <SessionProvider session={session}>
+      <Cookies />
       <Nav />
       <Component {...pageProps} />
     </SessionProvider>

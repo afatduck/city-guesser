@@ -1,6 +1,6 @@
 {
   "name": "earth-guesser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -33,6 +33,7 @@
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.14",
+    "postcss-import": "^14.1.0",
     "prisma": "^3.14.0",
     "tailwindcss": "^3.0.24",
     "typescript": "4.6.4"

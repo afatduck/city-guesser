@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Cookies from '../components/client/cookies'
+
+import styles from "../styles/page-styles/index.module.css"
 
 const Home: NextPage = () => {
 
@@ -10,22 +11,21 @@ const Home: NextPage = () => {
     <Head>
       <title>Welcome! | EarthGuesser</title>
     </Head>
-    <div className='grow max-w-xl mx-auto w-full pt-16 flex-col flex px-8 text-justify'>
-      <Cookies />
-      <h1 className='md:text-6xl text-5xl font-extrabold text-center leading-[1.1]'>
+    <div className={'grow max-w-xl mx-auto w-full pt-16 flex-col flex px-8 text-justify ' + styles.body} >
+      <h1 className='md:text-6xl text-5xl font-extrabold text-center leading-[1.1] mb-12'>
         Welcome to <span className='text-green-500'>EarthGuesser!</span>
       </h1>
-      <p className='mt-16'>
+      <p>
         This is a total rip-off of the GeoGuesser game. Since GeoGuesser has
         very limited playing time (unless you pay, and come on you will not
         pay to play fucking GeoGuesserer), I decided to make a game that is
         baisically the same, but completely free.
       </p>
-      <p className='mt-4'>
+      <p>
         Funnily enough, it turns out that rip-offs are completely legal because
         you can&apos;t put copyright on gameplay mechanics, only the assets.
       </p>
-      <p className='mt-4'>
+      <p>
         The game is currently in very early development, so it&apos;s kinda shit.
         Until further updates (which I will probably never do), you can play
         only the completely random gamemode (so expect being put in deserts, 
