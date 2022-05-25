@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       <p>
         This is a total rip-off of the GeoGuesser game. Since GeoGuesser has
         very limited playing time (unless you pay, and come on you will not
-        pay to play fucking GeoGuesserer), I decided to make a game that is
+        pay to play GeoGuesserer), I decided to make a game that is
         baisically the same, but completely free.
       </p>
       <p>
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
         only the completely random gamemode (so expect being put in deserts, 
         forests, seas and other unhelpful locations). 
         You can also expect bugs, like map not loading, or your
-        score not being saved. And lastly, cheting is possible, so I&apos;d
+        score not being saved. And lastly, cheating is possible, so I&apos;d
         like to see you try. ^^
       </p>
 

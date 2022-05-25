@@ -1,0 +1,36 @@
+.nav {
+
+    @apply flex justify-between items-center 
+    border-b-neutral-600 border-b
+    px-8 py-4;
+    animation: "fade-in-down" 0.5s ease-in-out;
+
+    h1 {
+        @apply font-extrabold md:text-3xl text-2xl cursor-pointer;
+
+        span {
+            @apply text-green-600;
+        }
+    }
+
+    & > div {
+        @apply flex relative items-center;
+
+        span > * {
+            @apply cursor-pointer bg-neutral-900 z-30
+            md:top-0 top-16 md:right-16 -right-4 p-2 md:p-0
+            rounded-full box-content md:box-border 
+            md:relative absolute
+        }
+
+        & > div {
+            @apply flex items-center gap-4;
+
+            p {
+                @apply underline cursor-pointer;
+            }
+        }
+        
+    }
+
+}

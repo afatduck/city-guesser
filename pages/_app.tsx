@@ -1,9 +1,13 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Nav from '../components/server/nav'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'
 import Cookies from '../components/client/cookies'
+import dynamic from 'next/dynamic'
+
+const Nav = dynamic(() => import('../components/server/nav'), {
+  loading: () => <nav className='h-[65px] md:h-[69px]' />
+})
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return <>
@@ -17,7 +21,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     </Head>
     <SessionProvider session={session}>
       <Cookies />
-      <Nav />
+        <Nav />
       <Component {...pageProps} />
     </SessionProvider>
   </>

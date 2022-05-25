@@ -58,7 +58,6 @@ export async function getServerSideProps() {
             image: true,
         },
     });
-    console.log(leaderboard);
     
     return {
         props: {

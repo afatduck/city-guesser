@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { getCenter, getDistance, getPoints, getZoom } from '../../utils/distance'
 import { ResultMessages } from '../../utils/result-messages'
 
+import styles from "../../styles/component-styles/result.module.css"
+
 const distanceToString = (distance: number) => {
     if (distance < 1000) {
         return `${distance} m`
@@ -58,7 +60,7 @@ function Result({loc1, loc2, show}: Props) {
     if (!show) return <></>
 
   return (
-      <div className='modal-outer'>
+      <div className={'modal-outer ' + styles.body}>
 
         <div className=''>
 
@@ -69,15 +71,15 @@ function Result({loc1, loc2, show}: Props) {
                 </p>
             </div>
 
-            <div className='distance-slider'>
-                <div className='distance-slider-label'/>
-                <div className='distance-slider-center'>
-                    <div className='distance-slider-bar'/>
-                    <span className='distance-slider-value'>
+            <div className={styles['distance-slider']}>
+                <div className={styles['distance-slider-label']}/>
+                <div className={styles['distance-slider-center']}>
+                    <div className={styles['distance-slider-bar']}/>
+                    <span className={styles['distance-slider-value']}>
                         Distance from actual location: {distanceToString(distance)}
                         </span>
                 </div>
-                <div className='distance-slider-label'/>
+                <div className={styles['distance-slider-label']}/>
             </div>
 
             <div ref={resultMap} 

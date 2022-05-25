@@ -2,10 +2,6 @@ function toRadians(degrees: number) {
     return degrees * Math.PI / 180;
 }
 
-function toDegrees(radians: number) {
-    return radians * 180 / Math.PI;
-}
-
 // Get distance in meters between two points on Earth
 export function getDistance(lat1: number, lon1: number, lat2:number, lon2:number) {    
     var R = 6371e3; // metres
@@ -32,7 +28,7 @@ export function getCenter(lat1: number, lon1: number, lat2:number, lon2:number) 
 // Make a inverse exponential function returns a number of points based
 // on how close the user was to the target
 export function getPoints(distance: number): number {
-    return Math.floor((3/Math.exp(distance / 200000)) * 500);
+    return Math.floor((3/Math.exp(distance / 500000)) * 500);
 }
          
 export function getZoom(distance: number): number {
