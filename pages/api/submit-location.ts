@@ -2,11 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getDistance, getPoints } from "../../utils/distance";
 import { getLocation } from "../../utils/redis/getSetLocation";
 import { getSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
+
+import prisma from "../../utils/prisma";
 
 // Welcome to the ugliest file in the entire project!!!
-
-const prisma = new PrismaClient();
 
 export default function handler (
     req: NextApiRequest,

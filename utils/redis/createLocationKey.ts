@@ -1,7 +1,7 @@
 import sha256 from 'crypto-js/sha256';
 import client from './client';
 
-const salt = process.env["LOCATION_KEY_SALT"];
+const salt = process.env["SECRET"];
 
 // Creates a key under which the location will be stored in redis.
 // First it just sets the key to 'open', then once client requests

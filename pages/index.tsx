@@ -16,9 +16,9 @@ const Home: NextPage = () => {
         Welcome to <span className='text-green-500'>EarthGuesser!</span>
       </h1>
       <p>
-        This is a total rip-off of the GeoGuesser game. Since GeoGuesser has
+        This is a total rip-off of the GeoGuessr game. Since GeoGuessr has
         very limited playing time (unless you pay, and come on you will not
-        pay to play GeoGuesserer), I decided to make a game that is
+        pay to play GeoGuessr), I decided to make a game that is
         baisically the same, but completely free.
       </p>
       <p>

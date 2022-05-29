@@ -1,25 +1,31 @@
-import { GetServerSideProps, GetServerSidePropsContext } from "next"
+import { GetServerSidePropsContext } from "next"
 import { BuiltInProviderType } from "next-auth/providers"
 import { ClientSafeProvider, getProviders, getSession, LiteralUnion, signIn } from "next-auth/react"
 import Head from "next/head";
+import Link from "next/link";
 import { BrandGoogle } from "tabler-icons-react";
 
+import styles from "../../styles/page-styles/sign-in.module.css";
+
 export default function SignIn({ providers }: Props) {
-  const  googleProvider = Object.values(providers)[0];
+  const googleProvider = Object.values(providers)[0];
+  const credentialsProvider = Object.values(providers)[1]; 
   return (
     <>
     <Head>
       <title>Sign in | EarthGuesser</title>
     </Head>
-    <div className="grow flex justify-center items-center">
-      <div className="bg-neutral-800 p-8 rounded-lg">
-        <h2 className="text-xl font-bold">Sign in:</h2>
-        <button className="flex gap-1 items-center py-2 bg-white text-neutral-900
-        my-4 rounded-md font-semibold px-4"
-        onClick={() => {signIn(googleProvider.id)}}>
-          Sign in with Google <BrandGoogle />
+    <div className={"middle-box " + styles.body}>
+      <div>
+        <h2>Sign in with:</h2>
+        <button onClick={() => {signIn(googleProvider.id)}}>
+          Google <BrandGoogle />
         </button>
-        <em className="opacity-50 font-extralight">Currently the only option.</em>
+        <Link href="/auth/cred-signin">
+          <button>
+            Username & Password
+          </button>
+        </Link>
       </div>
     </div>
     </>

@@ -9,3 +9,16 @@ body {
 button {
     @apply hover:brightness-90;
 }
+
+input {
+    @apply border border-neutral-500 block rounded-md p-2 bg-inherit mt-1
+        focus:outline-none focus:border-green-600 font-thin text-base w-full;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgb(38,38,38) inset !important;
+    -webkit-text-fill-color: #fff !important;
+}

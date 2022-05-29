@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 
 import Logo from "../../public/favicon-32x32.png"
 import { Trophy } from "tabler-icons-react"
@@ -10,6 +10,11 @@ import styles from "../../styles/component-styles/nav.module.css"
 export default function Nav() {
 
     const session = useSession();    
+    let userImage = session?.data?.user?.image
+    // Check if userImage is an apsolute URL
+    if (userImage && !userImage.startsWith("http")) {
+        userImage = `/avatars/${userImage}`
+    }
 
     return (
         <nav className={styles.nav}>
@@ -37,15 +42,15 @@ export default function Nav() {
                         </p> 
 
                         <Image 
-                        src={session.data.user.image} height={32} 
+                        src={userImage || ""} height={32} 
                         width={32} alt="Avatar" 
                         className="rounded-full"/>
 
                     </div>
                     :
-                    <p onClick={() => {signIn()}}>
-                        Sign in
-                    </p> 
+                    <Link href="/auth/signin" title="Sign in" rel="next">
+                        <a>Sign in</a>
+                    </Link>
                 }
             </div>
         </nav>

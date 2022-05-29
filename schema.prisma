@@ -41,9 +41,11 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-  image         String?
+  image         String    @default("default.png")
   best_score    Int       @default(0)
   total_score   Int       @default(0)
+  username      String?   @unique
+  password      String?
   accounts      Account[]
   sessions      Session[]
 }

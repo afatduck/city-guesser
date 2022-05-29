@@ -1,0 +1,8 @@
+.body {
+    > div {
+        button {
+            @apply flex gap-1 items-center py-2 bg-white text-neutral-900
+        my-4 rounded-md font-semibold w-60 justify-center;
+        }
+    }
+}

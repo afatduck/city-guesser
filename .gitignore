@@ -37,3 +37,7 @@ yarn-error.log*
 
 # Redis cache
 *.rdb
+
+# Avatars
+/public/avatars/*
+!public/avatars/default.png
