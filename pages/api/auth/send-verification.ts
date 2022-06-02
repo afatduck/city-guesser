@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         maxAge: 7 * 24 * 60 * 60,
         token: {
             userId: user.id,
-        },
+        } as any,
     });
 
     const base64JWT = Buffer.from(jwt).toString("base64");
@@ -35,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
 
     sendMail({
-        to: user.email,
+        to: user.email as string,
         subject: "EarthGuesser Email Verification",
         html: HTMLContent,
     });

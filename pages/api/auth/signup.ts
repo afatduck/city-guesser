@@ -67,7 +67,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             maxAge: 7 * 24 * 60 * 60,
             token: {
                 userId: user.id,
-            }
+            } as any
         })
         const base64JWT = Buffer.from(jwt).toString("base64");
         const url = `${process.env.NEXTAUTH_URL}/auth/verify/${base64JWT}`;
