@@ -23,7 +23,7 @@ export default function SignIn({ providers }: Props) {
         </button>
         <Link href="/auth/cred-signin">
           <button>
-            Username & Password
+            Username
           </button>
         </Link>
       </div>

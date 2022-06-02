@@ -36,16 +36,45 @@ export default NextAuth({
     ],
     callbacks: {
         session: async ({ session, token }) => {
-          if (session?.user) {
-            session.user.id = token?.uid as string;
-            session.user.username = token?.username as string;
+          if (token) {
+            session.user = { ...session.user, ...token}
           }
           return session;
         },
-        jwt: async ({ user, token }) => {
+
+        jwt: async ({ user, token }) => {     
           if (user) {
-            token.uid = user?.id;
-            token.username = user?.username;
+              const credentialsProvider = !!user.password
+              const emailVerified = !!user.emailVerified
+              const updatedAt = String(user.updatedAt)
+              token = { ...token, ...user, credentialsProvider, 
+                emailVerified, updatedAt };
+          } else if (token.updatedAt) {
+            const cachedUpdatedAt = await client.get(`UPDATED_AT_${token.id}`);  
+            if (cachedUpdatedAt && cachedUpdatedAt !== token.updatedAt) {
+                const user = await prisma.user.findFirst({
+                    where: {
+                        id: token.id as string,
+                    },
+                    select: {
+                        id: true,
+                        username: true,
+                        image: true,
+                        name: true,
+                        email: true,
+                        emailVerified: true,
+                        bestScore: true,
+                        totalScore: true,
+                        updatedAt: true,
+                    }
+                });
+                if (user !== null) return {
+                    ...token,
+                    ...user,
+                    emailVerified: !!user.emailVerified,
+                    updatedAt: String(user.updatedAt),
+                };
+            }
           }
           return token;
         },

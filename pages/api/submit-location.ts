@@ -28,15 +28,15 @@ export default function handler (
                     const session = await getSession({ req })
                     const userId = session?.user?.id
                     if (userId) {
-                        const { total_score, best_score } = await prisma.user.findFirst({
+                        const { totalScore, bestScore } = await prisma.user.findFirst({
                             where: { id: userId },
-                            select: { total_score: true, best_score: true }
-                        }) || { total_score: 0, best_score: 0 }
-                        const newTotalScore = total_score + points
-                        const newBestScore = Math.max(points, best_score)
+                            select: { totalScore: true, bestScore: true }
+                        }) || { totalScore: 0, bestScore: 0 }
+                        const newTotalScore = totalScore + points
+                        const newBestScore = Math.max(points, bestScore)
                         await prisma.user.update({
                             where: { id: userId },
-                            data: { total_score: newTotalScore, best_score: newBestScore }
+                            data: { totalScore: newTotalScore, bestScore: newBestScore }
                         })
                     }
                 }

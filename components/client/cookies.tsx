@@ -6,7 +6,8 @@ function Cookies() {
 
     useEffect(() => {
         const hasConsented = localStorage.getItem('hasConsented');
-        setConsent(!!hasConsented);
+        const isVerificationOrReset = RegExp('^/verification/|^/reset/').test(window.location.pathname);
+        setConsent(!!hasConsented && !isVerificationOrReset);
     }, [])
 
     const handleConsent = () => {

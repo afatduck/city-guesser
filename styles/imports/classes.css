@@ -1,3 +1,5 @@
+@layer components {
+
 /* Modal */
 
 .modal-outer {
@@ -14,7 +16,7 @@
 /* Box in middle */
 
 .middle-box {
-    @apply flex justify-center items-center grow;
+    @apply flex justify-center items-center grow py-[7vh];
 
     > div {
         @apply bg-neutral-800 p-8 rounded-lg w-96 max-w-[90vw];
@@ -31,10 +33,16 @@
     @apply !text-red-600;
 
     input {
-        @apply border-red-600;
+        @apply !border-red-600;
+    }
+
+    input:focus {
+        @apply !border-red-700;
     }
 
     p {
         @apply text-sm;
     }
+}
+
 }

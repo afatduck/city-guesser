@@ -39,11 +39,11 @@ export default function Reset() {
   return (
     <>
     <Head>
-        <title>Forgot Password | EathGuesser</title>
+        <title>Reset Password | EathGuesser</title>
     </Head>
     <div className="middle-box">
         <div>
-            <h2 className="mb-4">Forgot password:</h2>
+            <h2 className="mb-4">Reset password:</h2>
             {
                 success ? <p>The request has been successfully sent. Check your email. </p> :
                 <form onSubmit={handleSubmit}>

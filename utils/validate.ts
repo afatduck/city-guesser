@@ -39,3 +39,11 @@ export const validatePasswordError = (password: string): string => {
     }
     return '';
 }
+
+export const validateNameError = (name: string) => {
+    name = name.trim();
+    if (!name) return "";
+    if (name.length < 2) return "Name must be at least 2 characters long";
+    if (name.length > 32) return "Name must be at most 32 characters long";
+    return "";
+}

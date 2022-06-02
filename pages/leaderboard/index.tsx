@@ -4,6 +4,8 @@ import React from 'react'
 import Image from 'next/image';
 
 import prisma from '../../utils/prisma';
+import { formatImageURL } from '../../utils/misc';
+import Link from 'next/link';
 
 function Index({leaderboard}: Props) {
 
@@ -28,11 +30,18 @@ function Index({leaderboard}: Props) {
           leaderboard.map(user => (
                 <div className={`flex items-center bg-neutral-800 my-2 rounded-md px-4
                 justify-between p-2 ` + (user.id === userId && "text-green-500")} key={user.id}>
-                    <Image className='w-7 h-7 rounded-full mr-2' src={user.image.startsWith('http') ? user.image : `/avatars/${user.image}`}
-                    width={28} height={28} alt="Avatar" />
-                    <span className='font-bold mr-auto ml-2'>{user.username || user.name}</span>
-                    <span className='w-16 text-right'>{user.best_score}</span>
-                    <span className='w-16 text-right'>{user.total_score}</span>
+
+                    <Link href={`/user/${user.id}`}>
+                        <a className='flex items-center mr-auto'>
+                            <Image className='w-7 h-7 rounded-full mr-2' 
+                                src={formatImageURL(user.image)}
+                                width={28} height={28} alt="Avatar" />
+                            <span className='font-bold ml-2'>{user.username || user.name}</span>
+                        </a>
+                    </Link>
+
+                    <span className='w-16 text-right'>{user.bestScore}</span>
+                    <span className='w-16 text-right'>{user.totalScore}</span>
                 </div>
             ))
       }
@@ -47,13 +56,13 @@ export default Index
 export async function getServerSideProps() {
     const leaderboard = await prisma.user.findMany({
         orderBy: {
-            total_score: 'desc',
+            totalScore: 'desc',
         },
         select: {
             id: true,
             name: true,
-            total_score: true,
-            best_score: true,
+            totalScore: true,
+            bestScore: true,
             image: true,
             username: true,
         },
@@ -70,8 +79,8 @@ interface Props {
     leaderboard: {
         id: string,
         name: string,
-        total_score: number,
-        best_score: number,
+        totalScore: number,
+        bestScore: number,
         image: string,
         username: string,
     }[]

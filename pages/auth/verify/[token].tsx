@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import prisma from "../../../utils/prisma";
+import updateUpdatedAt from "../../../utils/redis/updated-at";
 
 export default function Verify({code}: Props) {
 
@@ -110,7 +111,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
                 data: {
                     emailVerified: new Date(),
                 },
-            }).then(() => { code = "OK"; })
+            }).then(() => { code = "OK"; updateUpdatedAt(userId); })
             .catch((err) => { console.log(err);});
         }).catch(() => {});
     }

@@ -1,0 +1,88 @@
+.body {
+    @apply flex flex-col lg:flex-row gap-8 !w-full md:!max-w-2xl lg:!max-w-4xl;
+}
+
+.profile-page-image {
+    @apply lg:!w-[26%] flex justify-center;
+}
+
+.profile-page-image-circle {
+    @apply rounded-full !border-4 !border-green-600 flex items-center justify-center
+    !border-solid !w-[75%] lg:!w-full mx-auto overflow-hidden relative lg:h-fit;
+
+    span, img { @apply pointer-events-none; }
+
+    >label {
+        @apply hidden justify-center items-center absolute
+        h-full w-full rounded-full bg-[#0008] cursor-pointer;
+
+        input {@apply hidden}
+    }
+
+    &:hover {
+        > label {
+            @apply flex;
+        }
+    }
+}
+
+.profile-page-image-change {
+    > div > div {
+        @apply flex justify-between items-center gap-8;
+
+        button {
+            @apply w-[50%] bg-white text-neutral-900 
+            font-bold py-2 px-4 rounded-md
+        }
+    }
+
+    > div > section {
+        @apply mb-4;
+    }
+}
+
+.profile-page-info {
+    @apply lg:p-4 relative grow flex flex-col;
+
+    > section {
+        @apply flex gap-4 text-center justify-around mb-6
+        lg:pr-4 lg:justify-end text-sm lg:absolute w-full;
+
+        * { @apply z-0 }
+
+        > div {
+            @apply flex flex-col items-center;
+        }
+
+        > div > p {
+            @apply mb-2;
+        }   
+
+        > div > div {
+            @apply w-16 h-16 border-2 rounded-full flex justify-center items-center;
+        }
+    }
+
+    > hr {
+        @apply mt-2 mb-4 opacity-50 lg:w-[calc(100%-11rem)];
+    }
+
+    * { @apply z-[1] }
+
+    > p > span {
+        @apply opacity-75 italic
+    }
+
+    > p > svg, > form > svg {
+        @apply cursor-pointer rounded-md hover:bg-neutral-900 p-1
+    }
+
+    > form > div {
+        @apply lg:w-[calc(100%-17rem)] m-0
+    }
+
+    > form > svg {
+        @apply p-2 h-10 w-10;
+    }
+
+}

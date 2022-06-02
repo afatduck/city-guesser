@@ -6,15 +6,12 @@ import Logo from "../../public/favicon-32x32.png"
 import { Trophy } from "tabler-icons-react"
 
 import styles from "../../styles/component-styles/nav.module.css"
+import { formatImageURL } from "../../utils/misc"
 
 export default function Nav() {
 
     const session = useSession();    
-    let userImage = session?.data?.user?.image
-    // Check if userImage is an apsolute URL
-    if (userImage && !userImage.startsWith("http")) {
-        userImage = `/avatars/${userImage}`
-    }
+    let userImage = formatImageURL(session?.data?.user?.image || "");
 
     return (
         <nav className={styles.nav}>
@@ -41,10 +38,14 @@ export default function Nav() {
                             Log out
                         </p> 
 
-                        <Image 
-                        src={userImage || ""} height={32} 
-                        width={32} alt="Avatar" 
-                        className="rounded-full"/>
+                        <Link href="/profile" title="Profile" rel="next">
+                            <a className="h-8">
+                                <Image 
+                                src={userImage || ""} height={32} 
+                                width={32} alt="Avatar" 
+                                className="rounded-full"/>
+                            </a>
+                        </Link>
 
                     </div>
                     :

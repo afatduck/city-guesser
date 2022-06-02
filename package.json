@@ -17,11 +17,13 @@
     "crypto-js": "^4.1.1",
     "encrypt-rsa": "^2.0.1",
     "googlemaps": "^1.12.0",
+    "image-size": "^1.0.1",
     "load-google-maps-api": "^2.0.2",
     "next": "12.1.6",
     "next-auth": "^4.3.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-image-crop": "^10.0.1",
     "redis": "^4.1.0",
     "tabler-icons-react": "^1.48.0"
   },
