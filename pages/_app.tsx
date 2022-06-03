@@ -1,4 +1,6 @@
 import '../styles/globals.css'
+import "@fontsource/plus-jakarta-sans/400.css"
+import "@fontsource/plus-jakarta-sans/700.css"
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'

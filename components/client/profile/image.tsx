@@ -87,9 +87,10 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
                         <ReacrCrop crop={crop} 
                         onChange={(c, pc) => {setCrop(pc)}}
                         aspect={1}>
-                            <Image src={newImage} alt="uploaded image"
+                            {/* eslint-disable-next-line @next/next/no-img-element*/}
+                            <img src={newImage} alt="uploaded image"
                              onLoad={handleImageLoad}
-                             className="!max-h-[65vh]" />
+                             className="!max-h-[65vh]"/>
                         </ReacrCrop>
                     </section>
                     <p className="text-red-600 mb-6">{error}</p>
