@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { checkPassword } from "../../../utils/passwords";
 
+import client from "../../../utils/redis/client";
 import prisma from "../../../utils/prisma";
 
 export default NextAuth({

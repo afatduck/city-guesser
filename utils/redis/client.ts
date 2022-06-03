@@ -16,15 +16,12 @@ const create = (): RedisClientType => {
   return c as any;
 }
 
-if (process.env.NODE_ENV === 'production') {
-  client = create();
-} else {
-  if (!global.client) {
+if (!global.client || !global.client.isOpen) {
     client = create();
     global.client = client;
   }
-  client = global.client;
-}
+client = global.client;
+
 
 export default client;
 
