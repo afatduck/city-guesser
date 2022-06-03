@@ -67,8 +67,7 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
             }).catch(err => { setError(err) })
             .finally(() => { setLoading(false) })
         })
-        .catch(err => {setError(err);})
-        .finally(() => { setLoading(false) })
+        .catch(err => {setError(err); setLoading(false); })
     }, [newImage, crop, owned, updateImage]);
 
     return <div className={styles['profile-page-image']}>

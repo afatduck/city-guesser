@@ -11,5 +11,5 @@ export const shortenNumber = (num: number): string => {
 export const formatImageURL = (url: string) => {
     if (url.match(/^https?:\/\//)) return url;
     else if (url.match(/^data:image\/[a-z]+;base64,/)) return url;
-    else return `/avatars/${url}`;
+    else return `https://storage.googleapis.com/earthguesser-bucket/avatars/${url}`;
 }

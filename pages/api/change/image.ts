@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import sizeOf from 'image-size';
-import fs from 'fs';
-import path from 'path';
+import sharp from 'sharp';
 
 import prisma from "../../../utils/prisma";
 import updateUpdatedAt from "../../../utils/redis/updated-at";
+import bucket from "../../../utils/bucket";
 
 export default async function changeImage(req: NextApiRequest, res: NextApiResponse) {
     const { base64Image } = req.body;
@@ -36,7 +36,6 @@ export default async function changeImage(req: NextApiRequest, res: NextApiRespo
 
     const user = session.user;
     const fileName = `${user.id}-${Date.now()}.png`;
-    const avatarPath = path.join("./", "public", "avatars");
     const previousImage = (await prisma.user.findFirst({
         where: {
             id: user.id
@@ -50,13 +49,11 @@ export default async function changeImage(req: NextApiRequest, res: NextApiRespo
     await prisma.user.update({
         where: { id: user.id },
         data: { image: fileName }
-    }).then(() => {
-        fs.writeFileSync(path.join(avatarPath, fileName), img);
+    }).then(async() => {
+        const resizedImage = await sharp(img).resize(512).toBuffer();
+        await bucket.file(`avatars/${fileName}`).save(resizedImage);
         res.status(200).json({ message: "Image uploaded" });
-
-        if (previousImage && previousImage !== "default.png") {
-            fs.unlinkSync(path.join(avatarPath, previousImage));
-        }
+        if (previousImage) bucket.file(`avatars/${previousImage}`).delete().catch(() => {});
         updateUpdatedAt(user.id);
     }).catch(err => {        
         res.status(500).json({ message: "Error uploading image" });
