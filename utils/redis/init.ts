@@ -1,7 +1,7 @@
 import client from "./client";
 import prisma from "../prisma";
 
-const users = prisma.user.findMany({
+prisma.user.findMany({
     select: {
         username: true,
         email: true,
@@ -10,6 +10,6 @@ const users = prisma.user.findMany({
     if (!users) return;
     const usernames = users.map(user => user.username).filter(username => username) as string[];
     const emails = users.map(user => user.email).filter(email => email) as string[];
-    client.sAdd("TAKEN_USERNAMES", usernames);
-    client.sAdd("TAKEN_EMAILS", emails);
+    if (usernames.length) client.sAdd("TAKEN_USERNAMES", usernames);
+    if (emails.length) client.sAdd("TAKEN_EMAILS", emails);
 })
