@@ -9,16 +9,6 @@ import { validatePasswordError } from "../../../utils/validate";
 
 export default function ResetResult({token, valid}: Props) {
 
-    if (!valid) {
-        return <><Head><title>Invalid Password Reset Link | EarthGuesser</title></Head>
-        <div className="middle-box"><div><h2 className="mb-4">Invalid Link</h2>
-                <p>The link you followed is invalid or has expired.
-                You can request a new one <Link href="/auth/reset">
-                    <a className="text-green-600">here</a></Link>.</p>
-            </div></div>
-        </>
-    }
-
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState({
         password: "",
@@ -82,6 +72,16 @@ export default function ResetResult({token, valid}: Props) {
             setLoading(false);
         });
 
+    }
+
+    if (!valid) {
+        return <><Head><title>Invalid Password Reset Link | EarthGuesser</title></Head>
+        <div className="middle-box"><div><h2 className="mb-4">Invalid Link</h2>
+                <p>The link you followed is invalid or has expired.
+                You can request a new one <Link href="/auth/reset">
+                    <a className="text-green-600">here</a></Link>.</p>
+            </div></div>
+        </>
     }
 
     return (

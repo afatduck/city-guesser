@@ -17,12 +17,13 @@ function Result({loc1, loc2, show}: Props) {
     const resultMap = React.useRef<HTMLDivElement>(null)
 
     const distance = !show ? 0 : getDistance(loc1[0], loc1[1], loc2[0], loc2[1])
-    const center = !show ? [0,0] : getCenter(loc1[0], loc1[1], loc2[0], loc2[1])
     const points = !show ? null : getPoints(distance)
 
     useEffect(() => {
 
         if (!show) return;
+
+        const center = getCenter(loc1[0], loc1[1], loc2[0], loc2[1])
 
         // Create map
         const google = window.google
@@ -55,7 +56,7 @@ function Result({loc1, loc2, show}: Props) {
             map: map,
         })
 
-    }, [center, distance, loc1, loc2, show])
+    }, [distance, loc1, loc2, show])
 
     if (!show) return <></>
 
