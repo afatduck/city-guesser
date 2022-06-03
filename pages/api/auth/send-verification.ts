@@ -5,7 +5,7 @@ import { userInfo } from "os";
 import sendMail from "../../../utils/mail/send";
 import { verificationMailHTML } from "../../../utils/mail/verification";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function sendVerification(req: NextApiRequest, res: NextApiResponse) {
 
     const session = await getSession({ req });
     if (!session || !session.user.id) {

@@ -7,7 +7,7 @@ import ButtonLoader from "../../../components/reusable/button-loader";
 import { Input } from "../../../components/reusable/input";
 import { validatePasswordError } from "../../../utils/validate";
 
-export default function ({token, valid}: Props) {
+export default function ResetResult({token, valid}: Props) {
 
     if (!valid) {
         return <><Head><title>Invalid Password Reset Link | EarthGuesser</title></Head>

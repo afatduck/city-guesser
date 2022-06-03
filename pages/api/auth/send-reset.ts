@@ -5,7 +5,7 @@ import sendMail from "../../../utils/mail/send";
 
 import prisma from "../../../utils/prisma";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function sendReset(req: NextApiRequest, res: NextApiResponse) {
     const { username } = req.body;
     if (!username) {
         res.status(400).json({ error: "No username provided" });

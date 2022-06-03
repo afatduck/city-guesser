@@ -8,7 +8,7 @@ import prisma from "../../utils/prisma";
 import styles from "../../styles/page-styles/profile.module.css";
 import ProfilePageImage from "../../components/client/profile/image";
 
-export default function ({user}: Props) {
+export default function User({user}: Props) {
     if (!user) return <>
         <Head>
             <title>User Not Found | EarthGuesser</title>

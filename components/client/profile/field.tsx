@@ -41,7 +41,7 @@ export default function ChangeableField({className,label,value,validate,submit}:
         return () => {
             document.removeEventListener("mousedown", closeIfClickedOutside);
         }
-    }, [open])
+    }, [open, value, closeIfClickedOutside])
 
     if (!open) {
         return <p className={className + " flex gap-2"}>

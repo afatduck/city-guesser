@@ -53,15 +53,15 @@ export default function Profile() {
 
     const submitUsername = useCallback(async (username: string) => {
         return submitChange("username", username);
-    }, []);
+    }, [submitChange]);
 
     const submitName = useCallback(async (name: string) => {
         return await submitChange("name", name);
-    }, []);
+    }, [submitChange]);
 
     const submitEmail = useCallback(async (email: string) => {
         return await submitChange("email", email);
-    }, []);
+    }, [submitChange]);
 
     if (session.status === "loading" || user.image === undefined) return <>
         <Head>

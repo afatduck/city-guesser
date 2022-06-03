@@ -7,7 +7,7 @@ import prisma from "../../../utils/prisma";
 import client from "../../../utils/redis/client";
 import updateUpdatedAt from "../../../utils/redis/updated-at";
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+export default async function changeEmail(req: NextApiRequest, res: NextApiResponse) {
     const { method } = req;
     if (method !== 'POST') {
         res.status(405).json({

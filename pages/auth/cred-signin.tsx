@@ -88,7 +88,7 @@ export default function CredSignin() {
                     </Link>
                 </div>
                 <p className="text-sm text-center text-neutral-400">
-                    Don't have an account?
+                    Don&apos;t have an account?
                     <Link href="/auth/cred-signup">
                         <a className="text-green-600 underline"> Sign up</a>
                     </Link>

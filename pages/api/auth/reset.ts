@@ -5,7 +5,7 @@ import { hashPassword } from "../../../utils/passwords";
 import prisma from "../../../utils/prisma";
 import { validatePassword } from "../../../utils/validate";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function reset(req: NextApiRequest, res: NextApiResponse) {
 
     const { password, token } = req.body;
 

@@ -7,7 +7,7 @@ import path from 'path';
 import prisma from "../../../utils/prisma";
 import updateUpdatedAt from "../../../utils/redis/updated-at";
 
-export default async function(req: NextApiRequest, res: NextApiResponse) {
+export default async function changeImage(req: NextApiRequest, res: NextApiResponse) {
     const { base64Image } = req.body;
     if (!base64Image) {
         res.status(400).json({ message: "No image provided" });

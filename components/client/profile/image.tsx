@@ -27,7 +27,7 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
         setNewImage(URL.createObjectURL(file));
     }
 
-    const handleImageLoad = owned && useCallback((e: SyntheticEvent<HTMLImageElement>) => {
+    const handleImageLoad = useCallback((e: SyntheticEvent<HTMLImageElement>) => {
         const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
         const longer = width < height ? {width: 100} : {height: 100};
         const crop = centerCrop(
@@ -46,7 +46,7 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
         setCrop(crop);
     }, []);
 
-    const handleChangeImage = owned && useCallback(async () => {
+    const handleChangeImage = useCallback(async () => {
         setLoading(true);
         setError("");
         cropImage({src: newImage, ...crop})
@@ -61,7 +61,7 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
                 })
             }).then(res => {
                 if (res.ok) {
-                    updateImage(croppedImage);
+                    if (owned) updateImage(croppedImage);
                     setNewImage("");
                 } else res.json().then(err => setError(err.message));
             }).catch(err => { setError(err) })
@@ -69,7 +69,7 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
         })
         .catch(err => {setError(err);})
         .finally(() => { setLoading(false) })
-    }, [newImage, crop]);
+    }, [newImage, crop, owned, updateImage]);
 
     return <div className={styles['profile-page-image']}>
         <div className={styles['profile-page-image-circle']}>
@@ -87,15 +87,15 @@ export default function ProfilePageImage({image, owned, updateImage}: Props) {
                         <ReacrCrop crop={crop} 
                         onChange={(c, pc) => {setCrop(pc)}}
                         aspect={1}>
-                            <img src={newImage} alt="uploaded image"
-                             onLoad={handleImageLoad as any}
-                             className="!max-h-[65vh]"/>
+                            <Image src={newImage} alt="uploaded image"
+                             onLoad={handleImageLoad}
+                             className="!max-h-[65vh]" />
                         </ReacrCrop>
                     </section>
                     <p className="text-red-600 mb-6">{error}</p>
                     {loading ? <Loader className="!text-green-600 !mx-auto" /> :
                     <div>
-                        <button onClick={handleChangeImage as any} 
+                        <button onClick={handleChangeImage} 
                         className="!bg-green-600 !text-white">Upload</button>
                         <button onClick={() => setNewImage("")}>Cancel</button>
                     </div>

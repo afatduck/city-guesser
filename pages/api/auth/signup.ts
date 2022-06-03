@@ -8,7 +8,7 @@ import { encode } from "next-auth/jwt";
 import sendMail from "../../../utils/mail/send";
 import { verificationMailHTML } from "../../../utils/mail/verification";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function signUp(req: NextApiRequest, res: NextApiResponse) {
 
     const { username, email, password } = req.body;
     if (!validateUsername(username)) {

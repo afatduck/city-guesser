@@ -55,7 +55,7 @@ function Result({loc1, loc2, show}: Props) {
             map: map,
         })
 
-    }, [center, distance, loc1, loc2])
+    }, [center, distance, loc1, loc2, show])
 
     if (!show) return <></>
 
