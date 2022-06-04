@@ -10,33 +10,28 @@ import bucket from "../../../utils/bucket";
 export default async function changeImage(req: NextApiRequest, res: NextApiResponse) {
     const { base64Image } = req.body;
     if (!base64Image) {
-        res.status(400).json({ message: "No image provided" });
-        return;
+        return res.status(400).json({ message: "No image provided" });
     }
     const img = Buffer.from(base64Image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
     const dimensions = sizeOf(img);
     if (typeof dimensions.width === 'undefined') {
-        res.status(400).json({ message: "Image data is not valid" });
-        return;
+        return res.status(400).json({ message: "Image data is not valid" });
     }
     
     if (dimensions.width < 128) {
-        res.status(400).json({ message: "Image is too small" });
-        return;
+        return res.status(400).json({ message: "Image is too small" });
     }
     if (dimensions.height !== dimensions.width) {
-        res.status(400).json({ message: "Image is not square" });
-        return;
+        return res.status(400).json({ message: "Image is not square" });
     }
     const session = await getSession({ req });
     if (!session || !session.user) {
-        res.status(401).json({ message: "Not logged in" });
-        return;
+        return res.status(401).json({ message: "Not logged in" });
     }
 
     const user = session.user;
     const fileName = `${user.id}-${Date.now()}.png`;
-    const previousImage = (await prisma.user.findFirst({
+    let previousImage = (await prisma.user.findFirst({
         where: {
             id: user.id
         },
@@ -44,7 +39,7 @@ export default async function changeImage(req: NextApiRequest, res: NextApiRespo
             image: true
         }
     }))?.image;
-    
+    if (/^https?:\/\//.test(previousImage || '')) previousImage = "";
 
     await prisma.user.update({
         where: { id: user.id },

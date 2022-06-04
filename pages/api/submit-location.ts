@@ -5,9 +5,7 @@ import { getSession } from "next-auth/react";
 
 import prisma from "../../utils/prisma";
 
-// Welcome to the ugliest file in the entire project!!!
-
-export default function handler (
+export default async function submitLocation(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -16,8 +14,7 @@ export default function handler (
         const key = req.body["key"]
         const location = req.body["location"]
         if (typeof key == "string" && Array.isArray(location) && location.length === 2) {
-            getLocation(key)
-            .catch(e => {res.status(406).end(e.message)})
+            await getLocation(key)
             .then(async target => {
                 if (target) {
                     const distance = getDistance(
@@ -41,6 +38,7 @@ export default function handler (
                     }
                 }
             })
+            .catch(e => {res.status(406).end(e.message)})
         }
     }
     

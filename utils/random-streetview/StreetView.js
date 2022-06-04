@@ -177,7 +177,6 @@ export class StreetView extends EventEmitter {
             });
         });
 
-        // console.log("Using mapContains");
         return mapContains;
     }
 
@@ -257,17 +256,14 @@ export class StreetView extends EventEmitter {
 
     getUrl(x, y, zoom) {
         return `https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i${zoom}!2i${x}!3i${y}!4i256!2m8!1e2!2ssvv!4m2!1scb_client!2sapiv3!4m2!1scc!2s*211m3*211e3*212b1*213e2*211m3*211e2*212b1*213e2!3m3!3sUS!12m1!1e68!4e0`;
-        // return `https://mts1.this.googleapis.com/vt?hl=en-US&lyrs=svv|cb_client:apiv3&style=40,18&x=${x}&y=${y}&z=${zoom}`;
     }
 
     async getTileImage(x, y, zoom) {
         return new Promise(async resolve => {
             const url = this.getUrl(x, y, zoom);
-            // console.log(x, y, zoom, url);
             let response = await fetch(url);
             let blob = await response.blob();
             const img = new Image();
-            // document.querySelector('.temp').prepend(img);
             img.src = URL.createObjectURL(blob);
             img.onload = () => resolve(img);
         });
@@ -277,7 +273,6 @@ export class StreetView extends EventEmitter {
         return new Promise(async resolve => {
             if (this.coverageCacheContains(x, y, zoom)) {
                 let {coverage, types} = this.getCoverageCache(x, y, zoom);
-                // console.log("Using cache!", x, y, zoom, coverage);
                 resolve({
                     coverage, types, img: false, x, y, zoom
                 });
@@ -352,7 +347,6 @@ export class StreetView extends EventEmitter {
         else
             pixelChunkSize = 2;
         pixelChunkSize = Math.min(pixelChunkSize, chunkSize);
-        // console.log("Using", {chunkSize, pixelChunkSize, zoom, img})
 
         for (let y = 0; y < img.height; y += chunkSize) {
             for (let x = 0; x < img.width; x += chunkSize) {
@@ -363,11 +357,9 @@ export class StreetView extends EventEmitter {
                     if (!this.containsLocation(coordinate, this.polygon)) {
                         continue;
                     }
-                    // console.log("Chunk is in polygon!");
                 }
                 for (let pY = y + pixelChunkSize / 2; pY < y + chunkSize; pY += pixelChunkSize) {
                     for (let pX = x + pixelChunkSize / 2; pX < x + chunkSize; pX += pixelChunkSize) {
-                        // console.log(pX, pY);
                         let i = (pY * img.width + pX) * 4;
                         let color = data.slice(i, i + 4);
                         let colorType = this.getColorType(color);

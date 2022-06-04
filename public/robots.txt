@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+User-agent: *
+Disallow: /profile/
+Disallow: /auth/verify/
+Disallow: /auth/reset/*
+
+Sitemap: https://earth-guesser.kdown.space/sitemap.xml

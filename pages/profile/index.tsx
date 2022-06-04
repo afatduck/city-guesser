@@ -77,6 +77,7 @@ export default function Profile() {
     return <>
         <Head>
             <title>Profile | EarthGuesser</title>
+            <meta name="robots" content="noindex"/>
         </Head>
         <div className="middle-box">
             <div className={styles.body}>

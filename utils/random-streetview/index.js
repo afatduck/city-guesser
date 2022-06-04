@@ -55,7 +55,6 @@ class RandomStreetView extends EventEmitter {
             });
         }
         if (!cacheKey && enableCaching && polygon) {
-            console.log(polygon)
             cacheKey = '';
             polygon.getPaths().forEach(p => p.forEach(c => cacheKey += c.lat().toString() + c.lng()));
         }

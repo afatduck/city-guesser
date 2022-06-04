@@ -60,6 +60,7 @@ export default function Verify({code}: Props) {
     return <>
     <Head>
         <title>Email Verification | EarthGuesser</title>
+        <meta name="robots" content="noindex"/>
     </Head>
     <div className="middle-box">
         <div>
@@ -74,7 +75,7 @@ export default function Verify({code}: Props) {
                     </p>
                     <p>
                         You can return to the 
-                        <Link href="/" rel="prev"> 
+                        <Link href="/"> 
                             <a className="text-green-600"> home page</a>
                         </Link>.
                     </p>

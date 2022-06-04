@@ -35,11 +35,11 @@ const Home: NextPage = () => {
         like to see you try. ^^
       </p>
 
-      <Link href='/play' rel='next'>
-        <button className=' text-3xl py-6 w-[80%] font-extrabold mt-16
-        bg-green-600 rounded-xl mx-auto mb-24'>
+      <Link href='/play'>
+        <a className=' text-3xl py-6 w-[80%] font-extrabold mt-16
+        bg-green-600 rounded-xl mx-auto mb-24 text-center'>
           PLAY
-        </button>
+        </a>
       </Link>
     </div>
     </>

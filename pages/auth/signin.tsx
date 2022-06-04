@@ -22,9 +22,9 @@ export default function SignIn({ providers }: Props) {
           Google <BrandGoogle />
         </button>
         <Link href="/auth/cred-signin">
-          <button>
+          <a>
             Username
-          </button>
+          </a>
         </Link>
       </div>
     </div>

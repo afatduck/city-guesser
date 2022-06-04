@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { setLocation } from '../../utils/redis/getSetLocation';
 
-export default function handler(
+export default async function saveLocation(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -12,7 +12,7 @@ export default function handler(
     const location = req.body['location'];
         
     if (typeof key == 'string' && typeof location == 'string') {
-      setLocation(key, location)
+      await setLocation(key, location)
         .then(() => res.status(200).end())
         .catch(e => res.status(406).end(e.message));
     }

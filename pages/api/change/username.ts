@@ -10,42 +10,37 @@ import updateUpdatedAt from "../../../utils/redis/updated-at";
 export default async function changeUsername(req: NextApiRequest, res: NextApiResponse) {
     const { method } = req;
     if (method !== 'POST') {
-        res.status(405).json({
+        return res.status(405).json({
             status: 405,
             message: 'Method not allowed'
         });
-        return;
     }
     const { username } = req.body;
     if (!username) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 400,
             message: 'Username is required'
         });
-        return;
     }
     const error = validateUsernameError(username);
     if (error) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 400,
             message: error
         });
-        return;
     }
     const session = await getSession({ req });
     if (!session || !session.user) {
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         });
-        return;
     }
     if (await client.SISMEMBER('TAKEN_USERNAMES', username)) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 400,
             message: 'Username is already taken'
         });
-        return;
     }
     const prevUsername = (await prisma.user.findFirst({
         where: {

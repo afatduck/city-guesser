@@ -12,40 +12,35 @@ export default async function signUp(req: NextApiRequest, res: NextApiResponse) 
 
     const { username, email, password } = req.body;
     if (!validateUsername(username)) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "IU",
         });
-        return;
     }
 
     if (!validateEmail(email)) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "IE",
         });
-        return;
     }
 
     if (!validatePassword(password)) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "IP",
         });
-        return;
     }
 
     const takenUsernames = await client.sMembers("TAKEN_USERNAMES");
     if (takenUsernames.includes(username)) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "TU",
         });
-        return;
     }
 
     const takenEmails = await client.sMembers("TAKEN_EMAILS");
     if (takenEmails.includes(email)) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "TE",
         });
-        return;
     }
 
     await prisma.user.create({

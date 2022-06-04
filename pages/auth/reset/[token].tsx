@@ -75,7 +75,10 @@ export default function ResetResult({token, valid}: Props) {
     }
 
     if (!valid) {
-        return <><Head><title>Invalid Password Reset Link | EarthGuesser</title></Head>
+        return <><Head>
+            <title>Invalid Password Reset Link | EarthGuesser</title>
+            <meta name="robots" content="noindex"/>
+        </Head>
         <div className="middle-box"><div><h2 className="mb-4">Invalid Link</h2>
                 <p>The link you followed is invalid or has expired.
                 You can request a new one <Link href="/auth/reset">
@@ -88,6 +91,7 @@ export default function ResetResult({token, valid}: Props) {
         <>
         <Head>
             <title>Set New Password | EarthGuesser</title>
+            <meta name="robots" content="noindex"/>
         </Head>
         <div className="middle-box">
            <div>

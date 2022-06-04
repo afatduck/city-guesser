@@ -18,17 +18,17 @@ export default function Nav() {
 
             <Image src={Logo} height={32} width={32} alt="Logo" />
 
-            <Link href="/" rel="back">
-                <h1>
+            <Link href="/">
+                <a><h1>
                     <span>Earth</span>Guesser
-                </h1>
+                </h1></a>
             </Link>
 
             <div>
-                <Link href="/leaderboard" title="Leaderboard" rel="next">
-                    <span>
-                        <Trophy />   
-                    </span>
+                <Link href="/leaderboard" title="Leaderboard">
+                    <a><span>
+                        <Trophy />
+                    </span></a>
                 </Link>
                 {
                     session.status === "authenticated" ?
@@ -38,7 +38,7 @@ export default function Nav() {
                             Log out
                         </p> 
 
-                        <Link href="/profile" title="Profile" rel="next">
+                        <Link href="/profile" title="Profile" rel="nofollow">
                             <a className="h-8">
                                 <Image 
                                 src={userImage || ""} height={32} 
@@ -49,7 +49,7 @@ export default function Nav() {
 
                     </div>
                     :
-                    <Link href="/auth/signin" title="Sign in" rel="next">
+                    <Link href="/auth/signin" title="Sign in">
                         <a>Sign in</a>
                     </Link>
                 }

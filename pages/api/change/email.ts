@@ -10,41 +10,36 @@ import updateUpdatedAt from "../../../utils/redis/updated-at";
 export default async function changeEmail(req: NextApiRequest, res: NextApiResponse) {
     const { method } = req;
     if (method !== 'POST') {
-        res.status(405).json({
+        return res.status(405).json({
             status: 405,
             message: 'Method not allowed'
         });
-        return;
     }
     const { email } = req.body;
     if (!email) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 400,
             message: 'Email is required'
         });
-        return;
     }
     if (!validateEmail(email)) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 400,
             message: 'Email is invalid'
         });
-        return;
     }
     const session = await getSession({ req });
     if (!session || !session.user) {
-        res.status(401).json({
+        return res.status(401).json({
             status: 401,
             message: 'Unauthorized'
         });
-        return;
     }
     if (await client.SISMEMBER('TAKEN_EMAILS', email)) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 400,
             message: 'Email is already taken'
         });
-        return;
     }
     const prevEmail = (await prisma.user.findFirst({
         where: {

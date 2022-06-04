@@ -9,11 +9,9 @@ export default async function sendVerification(req: NextApiRequest, res: NextApi
 
     const session = await getSession({ req });
     if (!session || !session.user.id) {
-        // Deny
-        res.status(401).json({
+        return res.status(401).json({
             error: "UNAUTHORIZED",
         });
-        return;
     }
     const user = session.user;
 

@@ -25,16 +25,13 @@ export default async function sendReset(req: NextApiRequest, res: NextApiRespons
         },
     });
     if (!user) {
-        res.status(404).json({ error: "User not found" });
-        return;
+        return res.status(404).json({ error: "User not found" });
     }
     if (!user.password) {
-        res.status(400).json({ error: "You can't reset password of an account which uses thrid party authentication." });
-        return;
+        return res.status(400).json({ error: "You can't reset password of an account which uses thrid party authentication." });
     }
     if (!user.emailVerified) {
-        res.status(400).json({ error: "User email not verified" });
-        return;
+        return res.status(400).json({ error: "User email not verified" });
     }
     const jwt = await encode({
         secret: process.env.SECRET as string,

@@ -9,7 +9,7 @@ const create = (): RedisClientType => {
   });
 
   c.on("error", function (err) {
-    console.log("Error " + err);
+    console.log("Redis client error " + err);
   });
 
   c.connect();
