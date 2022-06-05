@@ -6,10 +6,13 @@ import { createLocationKey } from '../../utils/redis/createLocationKey';
 import LE from '../../utils/locationEncryption';
 import Head from 'next/head';
 import { ArrowBackUp } from 'tabler-icons-react';
+import { GetServerSidePropsContext } from 'next';
+
+import gamemodes from '../../gamemodes.json';
 
 const Result = dynamic(() => import('../../components/server/result'), { ssr: true });
 
-function Index({googleMapsApiKey, locationKey}: Props) {
+function Index({googleMapsApiKey, locationKey, gamemode}: Props) {
 
     // Init state and refs
 
@@ -30,7 +33,10 @@ function Index({googleMapsApiKey, locationKey}: Props) {
         // Set up google maps api
 
         rsw.current = new randomStreetView();
-        const loader = new Loader({ apiKey: googleMapsApiKey, version: 'weekly'});
+        const loader = new Loader({ apiKey: googleMapsApiKey, 
+            version: 'weekly',
+            libraries: ['geometry']
+        });
 
         let street: google.maps.StreetViewPanorama;
         let map: google.maps.Map;
@@ -42,15 +48,21 @@ function Index({googleMapsApiKey, locationKey}: Props) {
             // Get api from loader
 
             const google = window.google;
+            let locationPromise: Promise<any>;
 
-            rsw.current?.setParameters({
-                google: google as any,
-            })
+            if (gamemode.type === 'RANDOM') {
+                rsw.current?.setParameters({
+                    google: google as any,
+                    polygon: gamemode.polygons as any || false,
+                })
+    
+                locationPromise = rsw.current?.getRandomLocation() as Promise<any>;
+            } else {
+                const lSet = gamemode.locations as unknown as number[][];
+                locationPromise = Promise.resolve(lSet[lSet.length - 1]);
+            }
 
-
-            // Generate random streetview location
-
-            rsw.current?.getRandomLocation().then((loc: any) =>{
+            locationPromise.then((loc: any) => {
 
                 targetLocation.current = [loc[0], loc[1]];
 
@@ -104,7 +116,7 @@ function Index({googleMapsApiKey, locationKey}: Props) {
                 })
             });
         });
-    }, [locationKey, googleMapsApiKey]);
+    }, [locationKey, googleMapsApiKey, gamemode]);
 
     const handleSubmit = () => {
         if (!guessLocation.current) return;
@@ -168,21 +180,32 @@ function Index({googleMapsApiKey, locationKey}: Props) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+
+    const gcode = context.query.gamemode;
+    if (typeof gcode !== "string" || !gamemodes.map(gm => gm.code.toLowerCase()).includes(gcode)) {
+        context.res.writeHead(302, {
+            Location: '/'
+        });
+        context.res.end();
+        return { props: {} };
+    }
 
     const locationKey = createLocationKey();
 
     return {
         props: {
             googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || "",
-            locationKey: locationKey
+            locationKey: locationKey,
+            gamemode: gamemodes.find(gm => gm.code === gcode.toUpperCase())
         }
     }
 }
 
-type Props = {
+interface Props {
     googleMapsApiKey: string
     locationKey: string
+    gamemode: typeof gamemodes[number]
 }
 
 export default Index

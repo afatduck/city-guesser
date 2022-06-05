@@ -40,10 +40,10 @@ export class StreetView extends EventEmitter {
     }
 
     async randomValidLocation({
-                                  endZoom = 13,
-                                  type = 'sv',
-                                  distribution = 'weighted'
-                              }) {
+        endZoom = 13,
+        type = 'sv',
+        distribution = 'weighted'
+    }) {
         this.distribution = distribution;
 
         let tile = await this.randomValidTile(endZoom, type, this.smallestContainingTile);

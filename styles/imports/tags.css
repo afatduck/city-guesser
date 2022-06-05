@@ -22,3 +22,17 @@ input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px rgb(38,38,38) inset !important;
     -webkit-text-fill-color: #fff !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-700;
+}

@@ -41,3 +41,6 @@ yarn-error.log*
 # Avatars
 /public/avatars/*
 !public/avatars/default.png
+
+# Thumbnails
+/public/thumbnails
