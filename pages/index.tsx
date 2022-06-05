@@ -16,23 +16,17 @@ const Home: NextPage = () => {
         Welcome to <span className='text-green-500'>EarthGuesser!</span>
       </h1>
       <p>
-        This is a total rip-off of the GeoGuessr game. Since GeoGuessr has
-        very limited playing time (unless you pay, and come on you will not
-        pay to play GeoGuessr), I decided to make a game that is
+        This is a rip-off of the GeoGuessr game. Since GeoGuessr has
+        very limited playing time (unless you pay), I decided to make a game that is
         baisically the same, but completely free.
       </p>
       <p>
-        Funnily enough, it turns out that rip-offs are completely legal because
-        you can&apos;t put copyright on gameplay mechanics, only the assets.
-      </p>
-      <p>
-        The game is currently in very early development, so it&apos;s kinda shit.
-        Until further updates (which I will probably never do), you can play
+        EarthGuesser is currently in very early development, so it&apos;s not the best thing ever.
+        Until further updates, you can play
         only the completely random gamemode (so expect being put in deserts, 
         forests, seas and other unhelpful locations). 
         You can also expect bugs, like map not loading, or your
-        score not being saved. And lastly, cheating is possible, so I&apos;d
-        like to see you try. ^^
+        score not being saved. 
       </p>
 
       <Link href='/play'>

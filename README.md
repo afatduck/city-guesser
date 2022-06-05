@@ -1,26 +1,28 @@
 # EarthGuesser
-A very original web game I came up with, not a copy of some other not free game at all. As you can see the name is also very original.
+Welcome to EarthGuesser repo. EarthGuesser is a rip-off of the web game GeoGuessr. I decided to make this one becuase GeoGuesser isn't free, and it seemed like a fun project idea.
 
-## How it works?
-Umm, you are placed in some random place in street view, and you have to guess where you are by placing a point on a map. The closer you are, the more points you get.
+The website is live at [earth-guesser.kdown.space](https://earth-guesser.kdown.space)
 
-## Technologies and stuff
-The app uses Next.js and Postgree SQL, Google Maps, and Tailwind.
+## Tech stack
+The app mainly uses Next.js, Postgree SQL, Redis, Google Maps, Google Cloud Storage and Tailwind.
 
 ## Progress made:
 - [x] Project created
-- [x] Got Google Maps api (scary😦)
+- [x] Got Google Maps to work
 - [x] Created the core gameplay functionality
-- [x] Created authentication
+- [x] Created authentication (Google)
 - [x] Created leaderboard
 - [x] Made welcome page, naviagtion and stuff.
-- [x] Icons, meta tags, and stuff like that.
-- [x] Deplyment!
-
+- [x] Icons, meta tags, etc...
+- [x] First release!
+- [x] Created authentication (user/pass)
+- [x] Created profile page
+- [ ] Created gamemode system (in progress, see "add-location-sets" branch)
+- [ ] Added delete profile, and participate in the leaderboard switch options.
+*no other plans atm*
 
 ## Note
 
-Uhhh, IDK if I'm allowed to do that, but I had to modify random-streetview a little, so now I don't use the package but have the copied code instead.
-
-Also I had to generate random locations in browser so I had to implement some
-weird anti-cheating solutions.
+Uhhh, not sure if I'm allowed to do that, but I had to modify random-streetview a little, so now I don't use the package but have the copied code instead.
+Attribution to the original package:
+[random-streetview](https://www.npmjs.com/package/random-streetview)
