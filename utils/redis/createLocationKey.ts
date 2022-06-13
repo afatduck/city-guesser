@@ -7,12 +7,12 @@ const salt = process.env["SECRET"];
 // First it just sets the key to 'open', then once client requests
 // storing the location, it will be changed to encrypted location.
 
-export const createLocationKey = (): string => {
+export const createLocationKey = (gamemode: string): string => {
 
     const key = sha256(salt + new Date().toString()).toString();
 
-    client.set("LOCATION_" + key, 'open', {
-        EX: 60
+    client.set(`LOCATION_${gamemode}_` + key, 'open', {
+        EX: 60 * 60
     });
 
     return key;

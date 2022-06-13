@@ -4,7 +4,7 @@ import React from 'react'
 import Image from 'next/image';
 
 import prisma from '../../utils/prisma';
-import { formatImageURL } from '../../utils/misc';
+import { formatImageURL, shortenNumber } from '../../utils/misc';
 import Link from 'next/link';
 
 function Index({leaderboard}: Props) {
@@ -41,7 +41,7 @@ function Index({leaderboard}: Props) {
                     </Link>
 
                     <span className='w-16 text-right'>{user.bestScore}</span>
-                    <span className='w-16 text-right'>{user.totalScore}</span>
+                    <span className='w-16 text-right'>{shortenNumber(user.totalScore)}</span>
                 </div>
             ))
       }

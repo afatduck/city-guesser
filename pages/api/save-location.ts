@@ -10,9 +10,11 @@ export default async function saveLocation(
   if (req.method === 'POST') {
     const key = req.body['key'];
     const location = req.body['location'];
+
+    const gamemode = req.cookies['gamemode'];
         
     if (typeof key == 'string' && typeof location == 'string') {
-      await setLocation(key, location)
+      await setLocation(`${gamemode}_${key}`, location)
         .then(() => res.status(200).end())
         .catch(e => res.status(406).end(e.message));
     }

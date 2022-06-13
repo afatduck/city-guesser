@@ -8,6 +8,15 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', "storage.googleapis.com"],
   },
+  async redirects() {
+    return [
+      {
+        source: '/play',
+        destination: '/play/ERR',
+        permanent: false,
+      },
+    ]
+  }
 }
 
 module.exports = nextConfig

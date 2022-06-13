@@ -21,14 +21,14 @@ class RandomStreetView extends EventEmitter {
     }
 
     async setParameters({
-                            polygon = false,
-                            enableCaching = true,
-                            endZoom = 14,
-                            cacheKey = false,
-                            type = 'sv',
-                            distribution = 'weighted',
-                            google = false,
-                        }) {
+        polygon = false,
+        enableCaching = true,
+        endZoom = 14,
+        cacheKey = false,
+        type = 'sv',
+        distribution = 'weighted',
+        google = false,
+    }) {
         if (!['sv', 'photo', 'both'].includes(type))
             console.error("Type parameter should be either 'sv', 'photo', or 'both'");
         if (!['weighted', 'uniform'].includes(distribution))
