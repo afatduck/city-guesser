@@ -6,18 +6,18 @@ import styles from "../../styles/component-styles/result.module.css"
 
 const distanceToString = (distance: number) => {
     if (distance < 1000) {
-        return `${distance} m`
+        return `${distance.toFixed(2)} m`
     } else {
         return `${(distance / 1000).toFixed(2)} km`
     }
 }
 
-function Result({loc1, loc2, show}: Props) {
+function Result({loc1, loc2, show, multiplier, refresh}: Props) {
 
     const resultMap = React.useRef<HTMLDivElement>(null)
 
     const distance = !show ? 0 : getDistance(loc1[0], loc1[1], loc2[0], loc2[1])
-    const points = !show ? null : getPoints(distance)
+    const points = !show ? null : getPoints(distance, multiplier)
 
     useEffect(() => {
 
@@ -66,7 +66,7 @@ function Result({loc1, loc2, show}: Props) {
         <div className=''>
 
             <div className='justify-between flex flex-col items-center gap-8 md:flex-row'>
-                <h2 className='font-bold text-4xl'>{ResultMessages(distance)}</h2>
+                <h2 className='font-bold text-4xl'>{ResultMessages(distance/multiplier)}</h2>
                 <p className='text-2xl text-green-500 font-bold'>
                     +{points} points
                 </p>
@@ -88,7 +88,7 @@ function Result({loc1, loc2, show}: Props) {
 
             <button className='bg-green-700 mt-8
             text-white font-bold py-2 px-4 rounded-full w-full uppercase'
-            onClick={() => window.location.reload()}>
+            onClick={() => refresh()}>
                 Play Again
             </button>
 
@@ -105,4 +105,6 @@ interface Props {
     loc1: [number, number],
     loc2: [number, number],
     show: boolean,
+    multiplier: number,
+    refresh: () => void,
 }

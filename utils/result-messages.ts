@@ -29,16 +29,16 @@ export const ResultMessages = (distance: number) => {
 
     const d = distance / 1000;
 
-    if (d < 5) {
+    if (d < 10) {
         return AmazingResult();
     }
-    else if (d < 50) {
+    else if (d < 100) {
         return GoodResult();
     }
-    else if (d < 1000) {
+    else if (d < 500) {
         return NutralResult();
     }
-    else if (d < 3000) {
+    else if (d < 1000) {
         return BadResult();
     }
     else {

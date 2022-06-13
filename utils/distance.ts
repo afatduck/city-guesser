@@ -27,8 +27,11 @@ export function getCenter(lat1: number, lon1: number, lat2:number, lon2:number) 
 
 // Make a inverse exponential function returns a number of points based
 // on how close the user was to the target
-export function getPoints(distance: number): number {
-    return Math.floor((3/Math.exp(distance / 500000)) * 500);
+export function getPoints(distance: number, multiplier: number = 1): number {
+    const km = distance / 1000;
+    const maxPoints = 1500 * multiplier;
+    const reducer = .005 / multiplier;
+    return Math.floor(maxPoints/Math.exp(km * reducer));
 }
          
 export function getZoom(distance: number): number {

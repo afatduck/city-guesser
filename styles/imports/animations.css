@@ -19,3 +19,11 @@
         transform: translateY(0%);
     }
 }
+
+.fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.fade-in-down {
+    animation: fade-in-down 0.5s ease-in-out;
+}

@@ -17,7 +17,7 @@ The app mainly uses Next.js, Postgree SQL, Redis, Google Maps, Google Cloud Stor
 - [x] First release!
 - [x] Created authentication (user/pass)
 - [x] Created profile page
-- [ ] Created gamemode system (in progress...)
+- [x] Created gamemode system
 - [ ] Added delete profile, and participate in the leaderboard switch options.
 *no other plans atm*
 

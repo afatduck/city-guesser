@@ -37,12 +37,12 @@ const Home: NextPage = () => {
         shadow-md cursor-pointer relative">
 
           <Image width={576} height={360} 
-          src={`https://storage.googleapis.com/earthguesser-bucket/thumbnails/${gamemode.code}.jpg`}
+          src={`https://storage.googleapis.com/earthguesser-bucket/thumbnails/${gamemode.code.toLocaleLowerCase()}.jpg`}
           layout='responsive'
           alt={`${gamemode.name} thumbnail.`} />
 
           <div className="px-6 py-4">
-          <h3 className='font-bold'>{gamemode.name}</h3>
+          <h3 className='font-bold mb-2'>{gamemode.name}</h3>
           <p className='text-sm text-neutral-300'>{gamemode.description}</p>
           </div>
 

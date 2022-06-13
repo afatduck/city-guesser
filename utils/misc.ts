@@ -13,3 +13,14 @@ export const formatImageURL = (url: string) => {
     else if (url.match(/^data:image\/[a-z]+;base64,/)) return url;
     else return `https://storage.googleapis.com/earthguesser-bucket/avatars/${url}`;
 }
+
+export const randomLocationLoadingMessage = (): string => {
+    const messages = [
+        'Loading...',
+        'Finding a spot',
+        'Hang tight',
+        'Just a moment',
+        'Just a sec',
+    ]
+    return messages[Math.floor(Math.random() * messages.length)];
+}
