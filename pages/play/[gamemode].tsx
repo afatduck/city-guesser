@@ -74,7 +74,8 @@ function Index({googleMapsApiKey, locationKey, gamemode}: Props) {
                 locationPromise = rsw.current?.getRandomLocation() as Promise<any>;
             } else {
                 const lSet = gamemode.locations as unknown as number[][];
-                locationPromise = Promise.resolve(lSet[lSet.length - 1]);
+                const randomIndex = Math.floor(Math.random() * lSet.length);
+                locationPromise = Promise.resolve(lSet[randomIndex]);
             }
             loc = await locationPromise;
         } while (!await chackeLocationValidity(loc as any));
